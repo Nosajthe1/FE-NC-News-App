@@ -1,3 +1,18 @@
+@import url(//db.onlinewebfonts.com/c/d18acb2db67fb3aae1ccd198d37a10e9?family=YoungSerif);
+@font-face {
+  font-family: "YoungSerif";
+  src: url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.eot");
+  src: url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/d18acb2db67fb3aae1ccd198d37a10e9.svg#YoungSerif")
+      format("svg");
+}
 .App {
   text-align: center;
   background-color: rgb(221, 241, 244);
@@ -6,7 +21,6 @@
 
 .list {
   padding-left: 0;
-  
 }
 
 button {
@@ -23,12 +37,11 @@ button:active {
 }
 
 .listItem {
+  font-family: "YoungSerif";
   font-size: large;
-  font-family: cambria;
   padding: 20px;
   margin: 15px auto;
   border: 5px solid black;
   width: auto;
   list-style: none;
-
 }
