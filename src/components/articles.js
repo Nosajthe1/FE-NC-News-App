@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { fetchAllArticles } from "../api";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
+  const { topic } = useParams();
 
   useEffect(() => {
-    fetchAllArticles()
+    fetchAllArticles(topic)
       .then((data) => {
         setArticles(data.articles);
       })
-      .catch((err) => { 
+      .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [topic]);
 
   return (
     <>
