@@ -7,9 +7,20 @@
 .list {
   padding-left: 0;
   
-
 }
 
+button {
+  background-color: bisque;
+  border: 2px black solid;
+  border-radius: 5%;
+  padding: 5px;
+  margin: 5px;
+  width: 100px;
+}
+
+button:active {
+  box-shadow: 2px 2px 2px grey;
+}
 
 .listItem {
   font-size: large;
