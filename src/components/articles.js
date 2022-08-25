@@ -31,7 +31,8 @@ export default function Articles() {
             <Link to={`/articles/${article.article_id}`}>
               <li className="listItem" key={article.article_id}>
                 <p>{article.title}</p> {article.topic}, Author:{article.author},
-                , Date:{new Date(article.created_at).getFullYear()}, Votes:
+                Posted:{article.created_at.split("T")[0]} at{" "}
+                {article.created_at.split("T")[1].split(".")[0]}, Votes:
                 {article.votes}, Comments:{article.comment_count}
               </li>
             </Link>
