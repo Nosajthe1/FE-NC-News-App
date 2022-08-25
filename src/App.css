@@ -58,3 +58,19 @@ button:active {
   width: auto;
   list-style: none;
 }
+
+.singleArticle {
+   font-family: "YoungSerif";
+  font-size: large;
+  padding: 20px;
+  margin: 15px auto;
+  border: 5px solid black;
+  width: auto;
+  list-style: none;
+
+}
+
+.arcTitleForComms {
+  font-size: xx-large;
+  text-decoration: underline;
+}

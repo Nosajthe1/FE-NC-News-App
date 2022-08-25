@@ -19,7 +19,6 @@ export default function NavBar() {
   return (
     <>
       {topics.map((eachtopic) => {
-        console.log(eachtopic);
         return (
           <Link to={`${eachtopic.slug} `} key={eachtopic.slug}>
             <button value={eachtopic.slug}>{eachtopic.slug}</button>
