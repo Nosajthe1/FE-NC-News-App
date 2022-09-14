@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { fetchArticleByID } from "../api";
-import Votes from "./updateVotes";
-import Error from "./errorMsg";
-import ListOfComments from "./Comments/commentList";
+import { fetchArticleByID } from "../../api";
+import Votes from "../updateVotes";
+import Error from "../errorMsg";
+import ListOfComments from "../Comments/commentList";
 
 
 

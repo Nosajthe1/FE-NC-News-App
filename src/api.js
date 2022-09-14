@@ -1,10 +1,14 @@
 import axios from "axios";
 
-export const fetchAllArticles = (topic) => {
+const articlesApi = axios.create({
+  baseURL: "https://be-nc-news-je123.herokuapp.com/api",
+});
+
+export const fetchAllArticles = (search) => {
+  let path = "/articles"
+  if (search) path += search;
   return axios
-    .get(`https://be-nc-news-je123.herokuapp.com/api/articles`, {
-      params: { topic },
-    })
+    .get(`https://be-nc-news-je123.herokuapp.com/api/articles`)
     .then(({ data }) => {
       return data;
     });
@@ -47,4 +51,41 @@ export const fetchComments = (article_id) => {
     .then(({ data }) => {
       return data;
     });
+};
+
+
+
+export const postComment = (article_id, body, username) => {
+  const responseBody = { username, body };
+  return axios
+    .post(
+      `https://be-nc-news-je123.herokuapp.com/api/articles/${article_id}/comments`,
+      responseBody
+    )
+    .then(({ data }) => { 
+      return data;
+    });
+};
+
+
+export const getUsers = () => {
+  return axios
+    .get(`https://be-nc-news-je123.herokuapp.com/api/users`)
+    .then(({ data }) => {
+      return data;
+    });
+};
+
+export const deleteComment = (comment_id) => {
+  return axios
+    .delete(`https://be-nc-news-je123.herokuapp.com/api/comments/${comment_id}`)
+    .then(() => {
+      return "deleted!";
+    });
+};
+
+export const getData = (search) => {
+  return articlesApi.get(`${search}`).then(({ data }) => {
+    return data;
+  });
 };

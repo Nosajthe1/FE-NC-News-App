@@ -1,31 +1,52 @@
 import "./App.css";
-import Articles from "./components/articles";
-import { Route, Routes } from "react-router-dom";
-import Home from "./components/home";
-import NavBar from "./components/navbar";
-import { useState } from "react";
 import Header from "./components/Header";
-import ArticleByID from "./components/singleArticle";
+import Nav from "./components/navbar";
+import ListOfArticles from "./components/Articles/articles";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
+import ArticleByID from "./components/Articles/singleArticle";
 import ListOfComments from "./components/Comments/commentList";
+import { useState } from "react";
+import LogInPage from "./components/logInPage";
+import { UserContext } from "./components/User.js";
+import Error from "./components/errorMsg";
 
 function App() {
-  return (
-    <div className="App">
-      <a href="/">
-        {" "}
-        <h1 id="title">NC News</h1>{" "}
-      </a>
+  const { search } = useLocation();
+  const [user, setUser] = useState([]);
+  console.log(search);
 
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Articles />} />
-        <Route path="/:topic" element={<Articles />} />
-        <Route path="/articles/:article_id" element={<ArticleByID />} />
-        <Route
-          path="/articles/:article_id/comments"
-          element={<ListOfComments />}
-        />
-      </Routes>
+  return (
+    <div>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className="App">
+          {typeof user === "string" ? (
+            <p className="logInText">
+              Logged in as: <mark>{user}</mark>
+            </p>
+          ) : (
+            <div className="logInText">
+              <Link to={"/login"}>Log in</Link>
+            </div>
+          )}
+          <Header />
+          <Nav />
+          <Routes>
+            <Route path="/login" element={<LogInPage />} />
+            <Route path="/" element={<ListOfArticles />} />
+            <Route
+              path="/articles"
+              element={<ListOfArticles search={search} />}
+            />
+            <Route path={`/articles${search}`} element={<ListOfArticles />} />
+            <Route path="/articles/:article_id" element={<ArticleByID />} />
+            <Route
+              path="/articles/:article_id/comments"
+              element={<ListOfComments />}
+            />
+            <Route path="*" element={<Error error={"404: Not Found"} />} />
+          </Routes>
+        </div>
+      </UserContext.Provider>
     </div>
   );
 }

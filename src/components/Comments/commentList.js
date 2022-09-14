@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { fetchComments, fetchArticleByID } from "../../api";
 import { useParams } from "react-router-dom";
+import AddComment from "./addComment";
+import CommentCard from "./commentCard";
 
 export default function ListOfComments() {
   const [allComments, setAllComments] = useState([]);
   const [articleTitle, setArticleTitle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
+  const [deletedCommentMsg, setDeletedCommentMsg] = useState(false);
 
   useEffect(() => {
     fetchComments(article_id).then(({ comments }) => {
@@ -22,29 +25,20 @@ export default function ListOfComments() {
 
   if (isLoading) return <p>One moment please...</p>;
   return (
-    <div>
+    <div className="CommentCard">
       <h3>All Comments for:</h3>
-      <h2 className="arcTitleForComms" >{articleTitle}</h2>
-      <h2>
-        
-      {allComments.map((comment) => { 
-          return (
-            <div>
-              {" "}
-              <li className="listItem">
-                <p>{comment.body}</p>
-                <p>Likes: {comment.votes}</p>
-                <p>Author: {comment.author}</p>
-                <p>{comment.article_id}</p>
-                <p>
-                  Posted:{comment.created_at.split("T")[0]} at{" "}
-                  {comment.created_at.split("T")[1].split(".")[0]}
-                </p>
-              </li>
-            </div>
-          );
-        })}
-      </h2>
+      <h2 className="CommentsCardHeader">{articleTitle}</h2>
+      <AddComment
+        article_id={article_id}
+        setAllComments={setAllComments}
+        deletedCommentMsg={deletedCommentMsg}
+      />
+      <CommentCard
+        allComments={allComments}
+        setAllComments={setAllComments}
+        deletedCommentMsg={deletedCommentMsg}
+        setDeletedCommentMsg={setDeletedCommentMsg}
+      />
     </div>
   );
 }
